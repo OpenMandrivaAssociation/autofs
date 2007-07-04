@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.1
-%define release %mkrel 5
+%define release %mkrel 6
 
 Name:           %{name}
 Version:        %{version}
@@ -42,7 +42,7 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch200 -p 1
 
 %build
-autoconf-2.5x
+autoconf
 %serverbuild
 %configure --with-mapdir=%{_sysconfdir}/%{name} \
            --with-confdir=%{_sysconfdir}/%{name} \
