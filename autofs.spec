@@ -1,6 +1,6 @@
 %define name    autofs
-%define version 5.0.1
-%define release %mkrel 6
+%define version 5.0.2
+%define release %mkrel 1
 
 Name:           %{name}
 Version:        %{version}
@@ -11,12 +11,12 @@ Group:          System/Kernel and hardware
 URL:            ftp://ftp.kernel.org/pub/linux/daemons/autofs
 Source0:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/autofs-%{version}.tar.bz2
 Source1:        %{name}.init
-Patch100:       autofs-5.0.1-rc1-fix-man-page.patch
-Patch101:       autofs-5.0.1-rc1-drop-default-prefix-from-config.patch
-Patch102:       autofs-5.0.1-rc3-separate-config-files.patch
-Patch103:       autofs-5.0.1-rc1-cleanup-config-files-names.patch
+Patch0:     autofs-5.0.2-add-krb5-include.patch
+Patch1:     autofs-5.0.2-bad-proto-init.patch
+Patch2:     autofs-5.0.2-add-missing-multi-support.patch
+Patch3:     autofs-5.0.2-add-multi-nsswitch-lookup.patch
+Patch102:       autofs-5.0.3-separate-config-files.patch
 Patch105:       autofs-5.0.1-rc3-comment-default-master-map.patch
-Patch200:       autofs-5.0.1-rc1-fix-hesiod-check.patch
 Requires:       nfs-utils-clients
 Requires:       kernel >= 2.6.17
 Requires(post): rpm-helper
@@ -34,12 +34,12 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch100 -p 1
-%patch101 -p 1
+%patch0 -p 1
+%patch1 -p 1
+%patch2 -p 1
+%patch3 -p 1
 %patch102 -p 1
-%patch103 -p 1
 %patch105 -p 1
-%patch200 -p 1
 
 %build
 autoconf
