@@ -25,6 +25,7 @@ Requires(preun):rpm-helper
 BuildRequires:  openldap-devel
 BuildRequires:  flex
 BuildRequires:  bison
+BuildRequires:  libsasl-devel
 Conflicts:      autosmb
 Buildroot:      %{_tmppath}/%{name}-%{version}
 
