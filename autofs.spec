@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.2
-%define release %mkrel 1
+%define release %mkrel 2
 
 Name:           %{name}
 Version:        %{version}
@@ -15,6 +15,7 @@ Patch0:     autofs-5.0.2-add-krb5-include.patch
 Patch1:     autofs-5.0.2-bad-proto-init.patch
 Patch2:     autofs-5.0.2-add-missing-multi-support.patch
 Patch3:     autofs-5.0.2-add-multi-nsswitch-lookup.patch
+Patch101:       autofs-5.0.2-set-default-browse-mode.patch
 Patch102:       autofs-5.0.3-separate-config-files.patch
 Patch105:       autofs-5.0.1-rc3-comment-default-master-map.patch
 Requires:       nfs-utils-clients
@@ -38,13 +39,14 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch1 -p 1
 %patch2 -p 1
 %patch3 -p 1
+%patch101 -p 1
 %patch102 -p 1
 %patch105 -p 1
 
 %build
 autoconf
 %serverbuild
-%configure --with-mapdir=%{_sysconfdir}/%{name} \
+%configure2_5x --with-mapdir=%{_sysconfdir}/%{name} \
            --with-confdir=%{_sysconfdir}/%{name} \
            --with-sasl=no
 %make DONTSTRIP=1
