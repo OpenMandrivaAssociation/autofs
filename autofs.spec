@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.2
-%define release %mkrel 2
+%define release %mkrel 3
 
 Name:           %{name}
 Version:        %{version}
@@ -11,6 +11,7 @@ Group:          System/Kernel and hardware
 URL:            ftp://ftp.kernel.org/pub/linux/daemons/autofs
 Source0:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/autofs-%{version}.tar.bz2
 Source1:        %{name}.init
+Source2:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/autofs-%{version}.tar.bz2.sign
 Patch0:     autofs-5.0.2-add-krb5-include.patch
 Patch1:     autofs-5.0.2-bad-proto-init.patch
 Patch2:     autofs-5.0.2-add-missing-multi-support.patch
@@ -49,7 +50,7 @@ autoconf
 %serverbuild
 %configure2_5x --with-mapdir=%{_sysconfdir}/%{name} \
            --with-confdir=%{_sysconfdir}/%{name} \
-           --with-sasl=no
+           --with-sasl=yes
 %make DONTSTRIP=1
 
 mkdir examples
