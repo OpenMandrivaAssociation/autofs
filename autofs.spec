@@ -16,8 +16,29 @@ Patch0:     autofs-5.0.2-add-krb5-include.patch
 Patch1:     autofs-5.0.2-bad-proto-init.patch
 Patch2:     autofs-5.0.2-add-missing-multi-support.patch
 Patch3:     autofs-5.0.2-add-multi-nsswitch-lookup.patch
+Patch4:     autofs-5.0.2-consistent-random-selection-option-name.patch
+Patch5:     autofs-5.0.2-fix-offset-dir-create.patch
+Patch6:     autofs-5.0.2-quote-exports.patch
+Patch7:     autofs-5.0.2-hi-res-time.patch
+Patch8:     autofs-5.0.2-quoted-slash-alone.patch
+Patch9:     autofs-5.0.2-fix-dnattr-parse.patch
+Patch10:    autofs-5.0.2-fix-nfs-version-in-get-supported-ver-and-cost.patch
+Patch11:    autofs-5.0.2-instance-stale-mark.patch
+Patch12:    autofs-5.0.2-fix-largefile-dumbness.patch
+Patch13:    autofs-5.0.2-dont-fail-on-empty-master.patch
+Patch14:    autofs-5.0.2-ldap-percent-hack.patch
+Patch15:    autofs-5.0.2-fix-mount-nfs-nosymlink.patch
+Patch16:    autofs-5.0.2-dont-fail-on-empty-master-fix.patch
+Patch17:    autofs-5.0.2-default-nsswitch.patch
+Patch18:    autofs-5.0.2-add-ldap-schema-discovery.patch
+Patch19:    autofs-5.0.2-random-selection-fix.patch
+Patch20:    autofs-5.0.2-timeout-option-parse-fix.patch
+Patch21:    autofs-5.0.2-ldap-check-star.patch
+Patch22:    autofs-5.0.2-add-ldap-schema-discovery-fix.patch
+Patch23:    autofs-5.0.2-ldap-schema-discovery-config-update.aptch
+Patch24:    autofs-5.0.2-ldap-search-basedn-list.patch
 Patch101:       autofs-5.0.2-set-default-browse-mode.patch
-Patch102:       autofs-5.0.3-separate-config-files.patch
+Patch102:       autofs-5.0.2-separate-config-files.patch
 Patch105:       autofs-5.0.1-rc3-comment-default-master-map.patch
 Requires:       nfs-utils-clients
 Requires:       kernel >= 2.6.17
@@ -41,6 +62,27 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch1 -p 1
 %patch2 -p 1
 %patch3 -p 1
+%patch4 -p 1
+%patch5 -p 1
+%patch6 -p 1
+%patch7 -p 1
+%patch8 -p 1
+%patch9 -p 1
+%patch10 -p 1
+%patch11 -p 1
+%patch12 -p 1
+%patch13 -p 1
+%patch14 -p 1
+%patch15 -p 1
+%patch16 -p 1
+%patch17 -p 1
+%patch18 -p 1
+%patch19 -p 1
+%patch20 -p 1
+%patch21 -p 1
+%patch22 -p 1
+%patch23 -p 1
+%patch24 -p 1
 %patch101 -p 1
 %patch102 -p 1
 %patch105 -p 1
@@ -50,7 +92,7 @@ autoconf
 %serverbuild
 %configure2_5x --with-mapdir=%{_sysconfdir}/%{name} \
            --with-confdir=%{_sysconfdir}/%{name} \
-           --with-sasl=yes
+           --with-sasl=no
 %make DONTSTRIP=1
 
 mkdir examples
