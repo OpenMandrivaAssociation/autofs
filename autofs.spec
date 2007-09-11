@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.2
-%define release %mkrel 4
+%define release %mkrel 5
 
 Name:           %{name}
 Version:        %{version}
@@ -48,6 +48,7 @@ BuildRequires:  openldap-devel
 BuildRequires:  flex
 BuildRequires:  bison
 BuildRequires:  libsasl-devel
+BuildRequires:  krb-devel
 Conflicts:      autosmb
 Buildroot:      %{_tmppath}/%{name}-%{version}
 
@@ -92,7 +93,7 @@ autoconf
 %serverbuild
 %configure2_5x --with-mapdir=%{_sysconfdir}/%{name} \
            --with-confdir=%{_sysconfdir}/%{name} \
-           --with-sasl=no
+           --with-sasl=yes
 %make DONTSTRIP=1
 
 mkdir examples
