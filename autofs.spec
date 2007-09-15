@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.2
-%define release %mkrel 5
+%define release %mkrel 6
 
 Name:           %{name}
 Version:        %{version}
@@ -39,6 +39,7 @@ Patch23:    autofs-5.0.2-ldap-schema-discovery-config-update.aptch
 Patch24:    autofs-5.0.2-ldap-search-basedn-list.patch
 Patch101:       autofs-5.0.2-set-default-browse-mode.patch
 Patch102:       autofs-5.0.2-separate-config-files.patch
+Patch103:       autofs-5.0.2-rename-configuration-file.patch
 Patch105:       autofs-5.0.1-rc3-comment-default-master-map.patch
 Requires:       nfs-utils-clients
 Requires:       kernel >= 2.6.17
@@ -86,6 +87,7 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch24 -p 1
 %patch101 -p 1
 %patch102 -p 1
+%patch103 -p 1
 %patch105 -p 1
 
 %build
