@@ -123,9 +123,13 @@ Mandriva RPM specific notes
 
 setup
 -----
-The configuration files setup differs from default one, by separating daemon
-configuration file (%{_sysconfdir}/autofs/autofs.conf) from initscript
-configuration file (%{_sysconfdir}/sysconfig/autofs).
+Configuration handling in Mandriva package differs from upstream one on several points:
+- the automounts daemon configuration file is %{_sysconfdir}/autofs/autofs.conf
+- the autofs service configuration file is %{_sysconfdir}/sysconfig/autofs
+- the configuration directives in %{_sysconfdir}/autofs/autofs.conf don't have
+  the 'DEFAULT_' prefix (for instance, DEFAULT_TIMEOUT is just TIMEOUT). This
+  has recently been changed upstream in version 5.0.2 too, but given than 
+  documentation still refers to old names
 
 Upgrade
 -------
