@@ -117,6 +117,7 @@ install -d -m 755 %{buildroot}%{_initrddir}
 install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 
 rm -f %{buildroot}%{_sysconfdir}/init.d/%{name}
+rm -f %{buildroot}%{_mandir}/man8/autofs*
 
 cat > README.urpmi <<EOF
 Mandriva RPM specific notes
