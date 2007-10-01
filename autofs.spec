@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.2
-%define release %mkrel 6
+%define release %mkrel 7
 
 Name:           %{name}
 Version:        %{version}
@@ -144,12 +144,8 @@ edit your configuration manually. See auto.master(5) for details.
 EOF
 
 %pre
-if [ $1 = "0" ]; then
-    # installation
-    if grep -q '^alias autofs autofs4'  /etc/modules.conf; then
-    echo "alias autofs autofs4" >> /etc/modules.conf
-    fi
-else
+if [ $1 != "0" ]; then
+    # upgrade
     if [ ! -d %{_sysconfdir}/autofs ]; then
         # 4 -> 5 upgrade
         mkdir %{_sysconfdir}/autofs
@@ -167,11 +163,6 @@ fi
 %preun
 %_preun_service autofs
 
-%postun
-if [ $1 = "0" ]; then # removal
-    perl -ni -e 'print unless ( m!^.*autofs.*$! || /^\s*$/)' /etc/modules.conf
-fi
-
 %clean
 rm -rf %{buildroot}
 
@@ -184,5 +175,3 @@ rm -rf %{buildroot}
 %{_libdir}/%{name}
 %{_sbindir}/automount
 %{_mandir}/*/*
-
-
