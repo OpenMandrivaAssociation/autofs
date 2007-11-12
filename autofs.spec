@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.2
-%define release %mkrel 8
+%define release %mkrel 9
 
 Name:           %{name}
 Version:        %{version}
