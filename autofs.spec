@@ -70,6 +70,7 @@ BuildRequires:  flex
 BuildRequires:  bison
 BuildRequires:  libsasl-devel
 BuildRequires:  krb-devel
+BuildRequires:  libxml2-devel
 Conflicts:      autosmb
 Buildroot:      %{_tmppath}/%{name}-%{version}
 
@@ -135,7 +136,7 @@ autoconf
 %serverbuild
 %configure2_5x --with-mapdir=%{_sysconfdir}/%{name} \
            --with-confdir=%{_sysconfdir}/%{name} \
-           --with-sasl=yes
+           --with-sasl=no
 %make DONTSTRIP=1
 
 mkdir examples
