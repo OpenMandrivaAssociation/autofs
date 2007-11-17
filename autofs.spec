@@ -58,6 +58,7 @@ Patch42:    autofs-5.0.2-basedn-with-spaces-fix-2.patch
 Patch43:    autofs-5.0.2-master-check-underscore.patch
 Patch44:    autofs-5.0.2-add-ldap-schema-discovery-fix-2.patch
 Patch45:    autofs-5.0.2-dynamic-logging-fixes2.patch
+Patch46:    autofs-5.0.2-link-with-kerberos-lib.patch
 Patch101:       autofs-5.0.2-set-default-browse-mode.patch
 Patch102:       autofs-5.0.2-separate-config-files.patch
 Patch103:       autofs-5.0.2-rename-configuration-file.patch
@@ -128,6 +129,7 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch43 -p 1
 %patch44 -p 1
 %patch45 -p 1
+%patch46 -p 1
 %patch101 -p 1
 %patch102 -p 1
 %patch103 -p 1
@@ -138,7 +140,7 @@ autoconf
 %serverbuild
 %configure2_5x --with-mapdir=%{_sysconfdir}/%{name} \
            --with-confdir=%{_sysconfdir}/%{name} \
-           --with-sasl=no
+           --with-sasl=yes
 %make DONTSTRIP=1
 
 mkdir examples
