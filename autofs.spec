@@ -74,7 +74,6 @@ BuildRequires:  libsasl-devel
 BuildRequires:  krb-devel
 BuildRequires:  libxml2-devel
 Conflicts:      autosmb
-Buildroot:      %{_tmppath}/%{name}-%{version}
 
 %description
 autofs is a daemon which automatically mounts filesystems when you use
