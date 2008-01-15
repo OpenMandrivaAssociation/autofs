@@ -12,52 +12,6 @@ URL:            ftp://ftp.kernel.org/pub/linux/daemons/autofs
 Source0:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/autofs-%{version}.tar.bz2
 Source1:        %{name}.init
 Source2:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/autofs-%{version}.tar.bz2.sign
-Patch0:     autofs-5.0.2-add-krb5-include.patch
-Patch1:     autofs-5.0.2-bad-proto-init.patch
-Patch2:     autofs-5.0.2-add-missing-multi-support.patch
-Patch3:     autofs-5.0.2-add-multi-nsswitch-lookup.patch
-Patch4:     autofs-5.0.2-consistent-random-selection-option-name.patch
-Patch5:     autofs-5.0.2-fix-offset-dir-create.patch
-Patch6:     autofs-5.0.2-quote-exports.patch
-Patch7:     autofs-5.0.2-hi-res-time.patch
-Patch8:     autofs-5.0.2-quoted-slash-alone.patch
-Patch9:     autofs-5.0.2-fix-dnattr-parse.patch
-Patch10:    autofs-5.0.2-fix-nfs-version-in-get-supported-ver-and-cost.patch
-Patch11:    autofs-5.0.2-instance-stale-mark.patch
-Patch12:    autofs-5.0.2-fix-largefile-dumbness.patch
-Patch13:    autofs-5.0.2-dont-fail-on-empty-master.patch
-Patch14:    autofs-5.0.2-ldap-percent-hack.patch
-Patch15:    autofs-5.0.2-fix-mount-nfs-nosymlink.patch
-Patch16:    autofs-5.0.2-dont-fail-on-empty-master-fix.patch
-Patch17:    autofs-5.0.2-default-nsswitch.patch
-Patch18:    autofs-5.0.2-add-ldap-schema-discovery.patch
-Patch19:    autofs-5.0.2-random-selection-fix.patch
-Patch20:    autofs-5.0.2-timeout-option-parse-fix.patch
-Patch21:    autofs-5.0.2-ldap-check-star.patch
-Patch22:    autofs-5.0.2-add-ldap-schema-discovery-fix.patch
-Patch23:    autofs-5.0.2-ldap-schema-discovery-config-update.aptch
-Patch24:    autofs-5.0.2-ldap-search-basedn-list.patch
-Patch25:    autofs-5.0.2-libxml2-workaround.patch
-Patch26:    autofs-5.0.2-reread-config-on-hup.patch
-Patch27:    autofs-5.0.2-add-multiple-server-selection-option.patch
-Patch28:    autofs-5.0.2-foreground-logging.patch
-Patch29:    autofs-5.0.2-cleanup-krb5-comment.patch
-Patch30:    autofs-5.0.2-submount-deadlock.patch
-Patch31:    autofs-5.0.2-add-ferror-check.patch
-Patch32:    autofs-5.0.2-autofs-5-typo.patch
-Patch33:    autofs-5.0.2-swallow-null-macro.patch
-Patch34:    autofs-5.0.2-remove-unsed-export-validation-code.patch
-Patch35:    autofs-5.0.2-dynamic-logging.patch
-Patch36:    autofs-5.0.2-fix-recursive-loopback-mounts.patch
-Patch37:    autofs-5.0.2-log-map-reload.patch
-Patch38:    autofs-5.0.2-basedn-with-spaces.patch
-Patch39:    autofs-5.0.2-dynamic-logging-fixes.patch
-Patch40:    autofs-5.0.2-basedn-with-spaces-fix.patch
-Patch41:    autofs-5.0.2-check-mtab-updated.patch
-Patch42:    autofs-5.0.2-basedn-with-spaces-fix-2.patch
-Patch43:    autofs-5.0.2-master-check-underscore.patch
-Patch44:    autofs-5.0.2-add-ldap-schema-discovery-fix-2.patch
-Patch45:    autofs-5.0.2-dynamic-logging-fixes2.patch
 Patch46:    autofs-5.0.2-link-with-kerberos-lib.patch
 Patch101:       autofs-5.0.2-set-default-browse-mode.patch
 Patch102:       autofs-5.0.2-separate-config-files.patch
@@ -83,52 +37,6 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch0 -p 1
-%patch1 -p 1
-%patch2 -p 1
-%patch3 -p 1
-%patch4 -p 1
-%patch5 -p 1
-%patch6 -p 1
-%patch7 -p 1
-%patch8 -p 1
-%patch9 -p 1
-%patch10 -p 1
-%patch11 -p 1
-%patch12 -p 1
-%patch13 -p 1
-%patch14 -p 1
-%patch15 -p 1
-%patch16 -p 1
-%patch17 -p 1
-%patch18 -p 1
-%patch19 -p 1
-%patch20 -p 1
-%patch21 -p 1
-%patch22 -p 1
-%patch23 -p 1
-%patch24 -p 1
-%patch25 -p 1
-%patch26 -p 1
-%patch27 -p 1
-%patch28 -p 1
-%patch29 -p 1
-%patch30 -p 1
-%patch31 -p 1
-%patch32 -p 1
-%patch33 -p 1
-%patch34 -p 1
-%patch35 -p 1
-%patch36 -p 1
-%patch37 -p 1
-%patch38 -p 1
-%patch39 -p 1
-%patch40 -p 1
-%patch41 -p 1
-%patch42 -p 1
-%patch43 -p 1
-%patch44 -p 1
-%patch45 -p 1
 %patch46 -p 1
 %patch101 -p 1
 %patch102 -p 1
