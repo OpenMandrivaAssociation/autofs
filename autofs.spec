@@ -16,7 +16,7 @@ Patch46:    autofs-5.0.2-link-with-kerberos-lib.patch
 Patch101:       autofs-5.0.2-set-default-browse-mode.patch
 Patch102:       autofs-5.0.2-separate-config-files.patch
 Patch103:       autofs-5.0.2-rename-configuration-file.patch
-Patch105:       autofs-5.0.1-rc3-comment-default-master-map.patch
+Patch105:       autofs-5.0.3-comment-default-master-map.patch
 Requires:       nfs-utils-clients
 Requires:       kernel >= 2.6.17
 Requires(post): rpm-helper
