@@ -17,6 +17,8 @@ Patch101:       autofs-5.0.2-set-default-browse-mode.patch
 Patch102:       autofs-5.0.2-separate-config-files.patch
 Patch103:       autofs-5.0.2-rename-configuration-file.patch
 Patch105:       autofs-5.0.3-comment-default-master-map.patch
+# upstream autofs-5.0.3 patches
+Patch200:       autofs-5.0.3-ldap-page-control-configure-fix.patch
 Requires:       nfs-utils-clients
 Requires:       kernel >= 2.6.17
 Requires(post): rpm-helper
@@ -42,6 +44,7 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch102 -p 1
 %patch103 -p 1
 %patch105 -p 1
+%patch200 -p 1
 
 %build
 autoconf
