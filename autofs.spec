@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.3
-%define release %mkrel 1
+%define release %mkrel 2
 
 Name:           %{name}
 Version:        %{version}
@@ -19,6 +19,7 @@ Patch103:       autofs-5.0.2-rename-configuration-file.patch
 Patch105:       autofs-5.0.3-comment-default-master-map.patch
 # upstream autofs-5.0.3 patches
 Patch200:       autofs-5.0.3-ldap-page-control-configure-fix.patch
+Patch201:       autofs-5.0.3-basedn-with-spaces-fix-3.patch
 # other 5.0.3 patches
 Patch250:       autofs-5.0.3-pthread.patch
 Requires:       nfs-utils-clients
@@ -47,6 +48,7 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch103 -p 1
 %patch105 -p 1
 %patch200 -p 1
+%patch201 -p 1
 %patch250 -p 1
 
 %build
