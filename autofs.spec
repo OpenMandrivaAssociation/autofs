@@ -23,6 +23,16 @@ Patch201:       autofs-5.0.3-xfn-not-supported.patch
 Patch202:       autofs-5.0.3-basedn-with-spaces-fix-3.patch
 Patch203:       autofs-5.0.3-nfs4-tcp-only.patch
 Patch204:       autofs-5.0.3-correct-ldap-lib.patch
+Patch205:	autofs-5.0.3-dont-fail-on-empty-master-fix-2.patch
+Patch206:	autofs-5.0.3-expire-works-too-hard.patch
+Patch207:	autofs-5.0.3-unlink-mount-return-fix.patch
+Patch208:	autofs-5.0.3-update-linux-auto_fs4-h.patch
+Patch209:	autofs-5.0.3-expire-works-too-hard-update.patch
+Patch210:	autofs-5.0.3-expire-works-too-hard-update-2.patch
+Patch211:	autofs-5.0.3-handle-zero-length-nis-key.patch
+Patch212:	autofs-5.0.2-init-cb-on-load.patch
+Patch213:	autofs-5.0.3-map-type-in-map-name.patch
+Patch214:	autofs-5.0.3-mount-thread-create-cond-handling.patch
 Requires:       nfs-utils-clients
 Requires:       kernel >= 2.6.17
 Requires(post): rpm-helper
@@ -53,6 +63,16 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch202 -p 1
 %patch203 -p 1
 %patch204 -p 1
+%patch205 -p 1
+%patch206 -p 1
+%patch207 -p 1
+%patch208 -p 1
+%patch209 -p 1
+%patch210 -p 1
+%patch211 -p 1
+%patch212 -p 1
+%patch213 -p 1
+%patch214 -p 1
 
 %build
 autoconf
