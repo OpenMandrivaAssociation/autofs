@@ -17,22 +17,33 @@ Patch101:       autofs-5.0.2-set-default-browse-mode.patch
 Patch102:       autofs-5.0.2-separate-config-files.patch
 Patch103:       autofs-5.0.2-rename-configuration-file.patch
 Patch105:       autofs-5.0.3-comment-default-master-map.patch
+Patch106:       autofs-5.0.3-fix-ldap-detection.patch
 # upstream autofs-5.0.3 patches
 Patch200:       autofs-5.0.3-ldap-page-control-configure-fix.patch
 Patch201:       autofs-5.0.3-xfn-not-supported.patch
 Patch202:       autofs-5.0.3-basedn-with-spaces-fix-3.patch
 Patch203:       autofs-5.0.3-nfs4-tcp-only.patch
 Patch204:       autofs-5.0.3-correct-ldap-lib.patch
-Patch205:	autofs-5.0.3-dont-fail-on-empty-master-fix-2.patch
-Patch206:	autofs-5.0.3-expire-works-too-hard.patch
-Patch207:	autofs-5.0.3-unlink-mount-return-fix.patch
-Patch208:	autofs-5.0.3-update-linux-auto_fs4-h.patch
-Patch209:	autofs-5.0.3-expire-works-too-hard-update.patch
-Patch210:	autofs-5.0.3-expire-works-too-hard-update-2.patch
-Patch211:	autofs-5.0.3-handle-zero-length-nis-key.patch
-Patch212:	autofs-5.0.2-init-cb-on-load.patch
-Patch213:	autofs-5.0.3-map-type-in-map-name.patch
-Patch214:	autofs-5.0.3-mount-thread-create-cond-handling.patch
+Patch205:       autofs-5.0.3-dont-fail-on-empty-master-fix-2.patch
+Patch206:       autofs-5.0.3-expire-works-too-hard.patch
+Patch207:       autofs-5.0.3-unlink-mount-return-fix.patch
+Patch208:       autofs-5.0.3-update-linux-auto_fs4-h.patch
+Patch209:       autofs-5.0.3-expire-works-too-hard-update.patch
+Patch210:       autofs-5.0.3-expire-works-too-hard-update-2.patch
+Patch211:       autofs-5.0.3-handle-zero-length-nis-key.patch
+Patch212:       autofs-5.0.2-init-cb-on-load.patch
+Patch213:       autofs-5.0.3-map-type-in-map-name.patch
+Patch214:       autofs-5.0.3-mount-thread-create-cond-handling.patch
+Patch215:       autofs-5.0.3-check-for-kernel-automount.patch
+Patch216:       autofs-5.0.3-nss-source-any.patch
+Patch217:       autofs-5.0.3-dont-abuse-ap-ghost-field.patch
+Patch218:       autofs-5.0.3-lookup-next-soucre-stale-entry.patch
+Patch219:       autofs-5.0.3-remove-redundant-dns-name-lookups.patch
+Patch220:       autofs-5.0.3-mount-thread-create-cond-handling-fix.patch
+Patch221:       autofs-5.0.3-allow-dir-create-on-nfs-root.patch
+Patch222:       autofs-5.0.3-check-direct-path-len.patch
+Patch223:       autofs-5.0.3-fix-get-user-info-check.patch
+Patch224:       autofs-5.0.3-fix-couple-of-memory-leaks.patch
 Requires:       nfs-utils-clients
 Requires:       kernel >= 2.6.17
 Requires(post): rpm-helper
@@ -58,6 +69,7 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch102 -p 1
 %patch103 -p 1
 %patch105 -p 1
+
 %patch200 -p 1
 %patch201 -p 1
 %patch202 -p 1
@@ -73,9 +85,21 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch212 -p 1
 %patch213 -p 1
 %patch214 -p 1
+%patch215 -p 1
+%patch216 -p 1
+%patch217 -p 1
+%patch218 -p 1
+%patch219 -p 1
+%patch220 -p 1
+%patch221 -p 1
+%patch222 -p 1
+%patch223 -p 1
+%patch224 -p 1
+
+%patch106 -p 1
 
 %build
-autoconf
+autoreconf
 %serverbuild
 %configure2_5x --with-mapdir=%{_sysconfdir}/%{name} \
            --with-confdir=%{_sysconfdir}/%{name} \
