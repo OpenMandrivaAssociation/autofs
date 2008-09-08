@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.3
-%define release %mkrel 6
+%define release %mkrel 7
 
 Name:           %{name}
 Version:        %{version}
@@ -44,7 +44,7 @@ Patch221:       autofs-5.0.3-allow-dir-create-on-nfs-root.patch
 Patch222:       autofs-5.0.3-check-direct-path-len.patch
 Patch223:       autofs-5.0.3-fix-get-user-info-check.patch
 Patch224:       autofs-5.0.3-fix-couple-of-memory-leaks.patch
-Requires:       kernel >= 2.6.17
+Conflicts:       kernel < 2.6.17
 Requires(post): rpm-helper
 Requires(preun):rpm-helper
 BuildRequires:  openldap-devel
