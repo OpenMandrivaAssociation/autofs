@@ -11,14 +11,18 @@ Group:          System/Kernel and hardware
 URL:            ftp://ftp.kernel.org/pub/linux/daemons/autofs
 Source0:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/autofs-%{version}.tar.bz2
 Source1:        %{name}.init
-Patch46:    autofs-5.0.2-link-with-kerberos-lib.patch
 Patch101:       autofs-5.0.2-set-default-browse-mode.patch
 Patch102:       autofs-5.0.4-separate-config-files.patch
-Patch103:       autofs-5.0.2-rename-configuration-file.patch
+Patch103:       autofs-5.0.4-rename-configuration-file.patch
 Patch105:       autofs-5.0.3-comment-default-master-map.patch
-Patch106:       autofs-5.0.3-fix-ldap-detection.patch
 Patch201:       autofs-5.0.4-fix-dumb-libxml2-check.patch
 Patch202:       autofs-5.0.4-expire-specific-submount-only.patch
+Patch203:       autofs-5.0.4-fix-negative-cache-non-existent-key.patch
+Patch204:       autofs-5.0.4-fix-ldap-detection.patch
+Patch205:       autofs-5.0.4-use-CLOEXEC-flag.patch
+Patch206:       autofs-5.0.4-fix-select-fd-limit.patch
+Patch207:       autofs-5.0.4-make-hash-table-scale-to-thousands-of-entries.patch
+Patch208:       autofs-5.0.4-fix-quoted-mess.patch
 Conflicts:       kernel < 2.6.17
 Requires(post): rpm-helper
 Requires(preun):rpm-helper
@@ -38,14 +42,18 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch46 -p 1
 %patch101 -p 1
 %patch102 -p 1
 %patch103 -p 1
 %patch105 -p 1
-%patch106 -p 1
 %patch201 -p 1
 %patch202 -p 1
+%patch203 -p 1
+%patch204 -p 1
+%patch205 -p 1
+%patch206 -p 1
+%patch207 -p 1
+%patch208 -p 1
 
 %build
 autoreconf
