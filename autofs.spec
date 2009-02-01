@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.4
-%define release %mkrel 2
+%define release %mkrel 3
 
 Name:           %{name}
 Version:        %{version}
@@ -11,6 +11,8 @@ Group:          System/Kernel and hardware
 URL:            ftp://ftp.kernel.org/pub/linux/daemons/autofs
 Source0:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/autofs-%{version}.tar.bz2
 Source1:        %{name}.init
+# this one is needed for ldap support
+Patch46:        autofs-5.0.4-link-with-kerberos-lib.patch
 Patch101:       autofs-5.0.2-set-default-browse-mode.patch
 Patch102:       autofs-5.0.4-separate-config-files.patch
 Patch103:       autofs-5.0.4-rename-configuration-file.patch
@@ -23,6 +25,7 @@ Patch205:       autofs-5.0.4-use-CLOEXEC-flag.patch
 Patch206:       autofs-5.0.4-fix-select-fd-limit.patch
 Patch207:       autofs-5.0.4-make-hash-table-scale-to-thousands-of-entries.patch
 Patch208:       autofs-5.0.4-fix-quoted-mess.patch
+Patch209:       autofs-5.0.4-fix-hosts-map-use-after-free.patch
 Conflicts:       kernel < 2.6.17
 Requires(post): rpm-helper
 Requires(preun):rpm-helper
@@ -42,6 +45,7 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch46 -p 1
 %patch101 -p 1
 %patch102 -p 1
 %patch103 -p 1
@@ -54,6 +58,7 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch206 -p 1
 %patch207 -p 1
 %patch208 -p 1
+%patch209 -p 1
 
 %build
 autoreconf
