@@ -1,6 +1,7 @@
 %define name    autofs
 %define version 5.0.4
 %define release %mkrel 3
+%define _default_patch_fuzz 2
 
 Name:           %{name}
 Version:        %{version}
@@ -25,7 +26,22 @@ Patch205:       autofs-5.0.4-use-CLOEXEC-flag.patch
 Patch206:       autofs-5.0.4-fix-select-fd-limit.patch
 Patch207:       autofs-5.0.4-make-hash-table-scale-to-thousands-of-entries.patch
 Patch208:       autofs-5.0.4-fix-quoted-mess.patch
-Patch209:       autofs-5.0.4-fix-hosts-map-use-after-free.patch
+Patch209:       autofs-5.0.4-use-CLOEXEC-flag-setmntent.patch
+Patch210:       autofs-5.0.4-fix-hosts-map-use-after-free.patch
+Patch211:       autofs-5.0.4-uris-list-locking-fix.patch
+Patch212:       autofs-5.0.4-renew-sasl-creds-upon-reconnect-fail.patch
+Patch213:       autofs-5.0.4-library-reload-fix-update.patch
+Patch214:       autofs-5.0.4-force-unlink-umount.patch
+Patch215:       autofs-5.0.4-always-read-file-maps.patch
+Patch216:       autofs-5.0.4-code-analysis-corrections.patch
+Patch217:       autofs-5.0.4-make-MAX_ERR_BUF-and-PARSE_MAX_BUF-use-easier-to-audit.patch
+Patch218:       autofs-5.0.4-easy-alloca-replacements.patch
+Patch219:       autofs-5.0.4-configure-libtirpc.patch
+Patch220:       autofs-5.0.4-ipv6-name-and-address-support.patch
+Patch221:       autofs-5.0.4-ipv6-parse.patch
+Patch222:       autofs-5.0.4-add-missing-changelog-entries.patch
+Patch223:       autofs-5.0.4-use-CLOEXEC-flag-setmntent-include-fix.patch
+Patch224:       autofs-5.0.4-easy-alloca-replacements-fix.patch
 Conflicts:       kernel < 2.6.17
 Requires(post): rpm-helper
 Requires(preun):rpm-helper
@@ -59,6 +75,21 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch207 -p 1
 %patch208 -p 1
 %patch209 -p 1
+%patch210 -p 1
+%patch211 -p 1
+%patch212 -p 1
+%patch213 -p 1
+%patch214 -p 1
+%patch215 -p 1
+%patch216 -p 1
+%patch217 -p 1
+%patch218 -p 1
+%patch219 -p 1
+%patch220 -p 1
+%patch221 -p 1
+%patch222 -p 1
+%patch223 -p 1
+%patch224 -p 1
 
 %build
 autoreconf
