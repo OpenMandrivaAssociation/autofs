@@ -1,7 +1,6 @@
 %define name    autofs
 %define version 5.0.4
-%define release %mkrel 3
-%define _default_patch_fuzz 2
+%define release %mkrel 4
 
 Name:           %{name}
 Version:        %{version}
