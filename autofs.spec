@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.4
-%define release %mkrel 4
+%define release %mkrel 5
 
 Name:           %{name}
 Version:        %{version}
@@ -13,10 +13,8 @@ Source0:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/autofs-%{versio
 Source1:        %{name}.init
 # this one is needed for ldap support
 Patch46:        autofs-5.0.4-link-with-kerberos-lib.patch
-Patch101:       autofs-5.0.2-set-default-browse-mode.patch
 Patch102:       autofs-5.0.4-separate-config-files.patch
 Patch103:       autofs-5.0.4-rename-configuration-file.patch
-Patch105:       autofs-5.0.3-comment-default-master-map.patch
 Patch201:       autofs-5.0.4-fix-dumb-libxml2-check.patch
 Patch202:       autofs-5.0.4-expire-specific-submount-only.patch
 Patch203:       autofs-5.0.4-fix-negative-cache-non-existent-key.patch
@@ -41,6 +39,10 @@ Patch221:       autofs-5.0.4-ipv6-parse.patch
 Patch222:       autofs-5.0.4-add-missing-changelog-entries.patch
 Patch223:       autofs-5.0.4-use-CLOEXEC-flag-setmntent-include-fix.patch
 Patch224:       autofs-5.0.4-easy-alloca-replacements-fix.patch
+Patch225:       autofs-5.0.4-libxml2-workaround-fix.patch
+Patch226:       autofs-5.0.4-configure-libtirpc-fix.patch
+Patch227:       autofs-5.0.4-add-nfs-mount-proto-default-conf-option.patch
+Patch228:       autofs-5.0.4-fix-bad-token-declare.patch
 Conflicts:       kernel < 2.6.17
 Requires(post): rpm-helper
 Requires(preun):rpm-helper
@@ -61,10 +63,6 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %prep
 %setup -q -n %{name}-%{version}
 %patch46 -p 1
-%patch101 -p 1
-%patch102 -p 1
-%patch103 -p 1
-%patch105 -p 1
 %patch201 -p 1
 %patch202 -p 1
 %patch203 -p 1
@@ -89,6 +87,13 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch222 -p 1
 %patch223 -p 1
 %patch224 -p 1
+%patch225 -p 1
+%patch226 -p 1
+%patch227 -p 1
+%patch228 -p 1
+
+%patch102 -p 1
+%patch103 -p 1
 
 %build
 autoreconf
@@ -142,6 +147,14 @@ queries. As this can't be handled by package upgrade procedure, you'll have to
 edit your configuration manually. See auto.master(5) for details.
 
 EOF
+
+# tune default configuration
+perl -pi -e 's|^BROWSE_MODE="no"|BROWSE_MODE="yes"|' \
+    %{buildroot}%{_sysconfdir}/autofs/autofs.conf
+perl -pi \
+    -e 's|^/misc\t|#/misc\t|;' \
+    -e 's|^/net\t|#/net\t|;' \
+    %{buildroot}%{_sysconfdir}/autofs/auto.master
 
 %pre
 if [ $1 != "0" ]; then
