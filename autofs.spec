@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.4
-%define release %mkrel 5
+%define release %mkrel 6
 
 Name:           %{name}
 Version:        %{version}
@@ -43,6 +43,8 @@ Patch225:       autofs-5.0.4-libxml2-workaround-fix.patch
 Patch226:       autofs-5.0.4-configure-libtirpc-fix.patch
 Patch227:       autofs-5.0.4-add-nfs-mount-proto-default-conf-option.patch
 Patch228:       autofs-5.0.4-fix-bad-token-declare.patch
+Patch229:       autofs-5.0.4-fix-return-start-status-on-fail.patch
+Patch230:       autofs-5.0.4-fix-double-free-in-expire_proc.patch
 Conflicts:       kernel < 2.6.17
 Requires(post): rpm-helper
 Requires(preun):rpm-helper
@@ -91,6 +93,8 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch226 -p 1
 %patch227 -p 1
 %patch228 -p 1
+%patch229 -p 1
+%patch230 -p 1
 
 %patch102 -p 1
 %patch103 -p 1
