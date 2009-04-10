@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.4
-%define release %mkrel 6
+%define release %mkrel 7
 
 Name:           %{name}
 Version:        %{version}
@@ -45,6 +45,12 @@ Patch227:       autofs-5.0.4-add-nfs-mount-proto-default-conf-option.patch
 Patch228:       autofs-5.0.4-fix-bad-token-declare.patch
 Patch229:       autofs-5.0.4-fix-return-start-status-on-fail.patch
 Patch230:       autofs-5.0.4-fix-double-free-in-expire_proc.patch
+Patch231:       autofs-5.0.4-another-easy-alloca-replacements-fix.patch
+Patch232:       autofs-5.0.4-add-lsb-init-script-parameter-block.patch
+Patch233:       autofs-5.0.4-always-read-file-maps-fix.patch
+Patch234:       autofs-5.0.4-use-misc-device.patch
+Patch235:       autofs-5.0.4-fix-restorecon.patch
+Patch236:       autofs-5.0.4-clear-rpc-client-on-lookup-fail.patch
 Conflicts:       kernel < 2.6.17
 Requires(post): rpm-helper
 Requires(preun):rpm-helper
@@ -95,6 +101,12 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch228 -p 1
 %patch229 -p 1
 %patch230 -p 1
+%patch231 -p 1
+%patch232 -p 1
+%patch233 -p 1
+%patch234 -p 1
+%patch235 -p 1
+%patch236 -p 1
 
 %patch102 -p 1
 %patch103 -p 1
