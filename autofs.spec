@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.4
-%define release %mkrel 7
+%define release %mkrel 8
 
 Name:           %{name}
 Version:        %{version}
@@ -51,6 +51,15 @@ Patch233:       autofs-5.0.4-always-read-file-maps-fix.patch
 Patch234:       autofs-5.0.4-use-misc-device.patch
 Patch235:       autofs-5.0.4-fix-restorecon.patch
 Patch236:       autofs-5.0.4-clear-rpc-client-on-lookup-fail.patch
+Patch237:       autofs-5.0.4-fix-lsb-init-script-header.patch
+Patch238:       autofs-5.0.4-fix-memory-leak-reading-ldap-master.patch
+Patch239:       autofs-5.0.4-fix-st_remove_tasks-locking.patch
+Patch240:       autofs-5.0.4-reset-flex-scanner-when-setting-buffer.patch
+Patch241:       autofs-5.0.4-zero-s_magic-is-valid.patch
+Patch242:       autofs-5.0.4-use-percent-hack-for-master.patch
+Patch243:       autofs-5.0.4-use-intr-as-hosts-mount-default.patch
+Patch244:       autofs-5.0.4-fix-kernel-includes.patch
+Patch245:       autofs-5.0.4-dont-umount-existing-direct-mount-on-reread.patch
 Conflicts:       kernel < 2.6.17
 Requires(post): rpm-helper
 Requires(preun):rpm-helper
@@ -107,6 +116,15 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch234 -p 1
 %patch235 -p 1
 %patch236 -p 1
+%patch237 -p 1
+%patch238 -p 1
+%patch239 -p 1
+%patch240 -p 1
+%patch241 -p 1
+%patch242 -p 1
+%patch243 -p 1
+%patch244 -p 1
+%patch245 -p 1
 
 %patch102 -p 1
 %patch103 -p 1
