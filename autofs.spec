@@ -60,6 +60,24 @@ Patch242:       autofs-5.0.4-use-percent-hack-for-master.patch
 Patch243:       autofs-5.0.4-use-intr-as-hosts-mount-default.patch
 Patch244:       autofs-5.0.4-fix-kernel-includes.patch
 Patch245:       autofs-5.0.4-dont-umount-existing-direct-mount-on-reread.patch
+Patch246:       autofs-5.0.4-library-reload-fix-update-fix.patch
+Patch247:       autofs-5.0.4-improve-manual-umount-recovery.patch
+Patch248:       autofs-5.0.4-dont-fail-on-ipv6-address-adding-host.patch
+Patch249:       autofs-5.0.4-always-read-file-maps-multi-map-fix.patch
+Patch250:       autofs-5.0.4-always-read-file-maps-key-lookup-fixes.patch
+Patch251:       autofs-5.0.4-use-srv-query-for-domain-dn.patch
+Patch252:       autofs-5.0.4-fix-incorrect-dclist-free.patch
+Patch253:       autofs-5.0.4-srv-lookup-handle-endian.patch
+Patch254:       autofs-5.0.4-library-reload-fix-update-fix-2.patch
+Patch255:       autofs-5.0.4-fix-notify-mount-message-path.patch
+Patch256:       autofs-5.0.4-remount-we-created-mount-point-fix.patch
+Patch257:       autofs-5.0.4-fix-double-free-in-do_sasl_bind.patch
+Patch258:       autofs-5.0.4-manual-umount-recovery-fixes.patch
+Patch259:       autofs-5.0.4-fix-map-type-info-parse-error.patch
+Patch260:       autofs-5.0.4-fix-map-type-info-parse-error-update.patch
+Patch261:       autofs-5.0.4-fix-rpc-fd-leak.patch
+Patch262:       autofs-5.0.4-allow-automount-daemon-to-dump-core.patch
+Patch263:       autofs-5.0.4-fix-pthread-push-order-in-expire_proc_direct.patch
 Conflicts:       kernel < 2.6.17
 Requires(post): rpm-helper
 Requires(preun):rpm-helper
@@ -125,6 +143,24 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %patch243 -p 1
 %patch244 -p 1
 %patch245 -p 1
+%patch246 -p 1
+%patch247 -p 1
+%patch248 -p 1
+%patch249 -p 1
+%patch250 -p 1
+%patch251 -p 1
+%patch252 -p 1
+%patch253 -p 1
+%patch254 -p 1
+%patch255 -p 1
+%patch256 -p 1
+%patch257 -p 1
+%patch258 -p 1
+%patch259 -p 1
+%patch260 -p 1
+%patch261 -p 1
+%patch262 -p 1
+%patch263 -p 1
 
 %patch102 -p 1
 %patch103 -p 1
