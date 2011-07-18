@@ -1,6 +1,6 @@
 %define name    autofs
 %define version 5.0.6
-%define release %mkrel 1
+%define release %mkrel 2
 
 Name:           %{name}
 Version:        %{version}
@@ -11,6 +11,7 @@ Group:          System/Kernel and hardware
 URL:            ftp://ftp.kernel.org/pub/linux/daemons/autofs
 Source0:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/autofs-%{version}.tar.bz2
 Source1:        %{name}.init
+Patch0:         autofs-5.0.6-fix-ipv6-name-for-lookup-fix.patch
 Patch102:       autofs-5.0.4-separate-config-files.patch
 Patch103:       autofs-5.0.4-rename-configuration-file.patch
 Conflicts:       kernel < 2.6.17
@@ -32,6 +33,7 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0 -p 1
 %patch102 -p 1
 %patch103 -p 1
 
