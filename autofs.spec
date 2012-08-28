@@ -1,30 +1,26 @@
-%define name    autofs
-%define version 5.0.6
-%define release %mkrel 2
-
-Name:           %{name}
-Version:        %{version}
-Release:        %{release}
-License:        GPL
+Name:           autofs
+Version:        5.0.7
+Release:        %mkrel 1
+License:        GPLv2+
 Summary:        A tool for automatically mounting and unmounting filesystems
 Group:          System/Kernel and hardware
 URL:            ftp://ftp.kernel.org/pub/linux/daemons/autofs
 Source0:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/autofs-%{version}.tar.bz2
-Source1:        %{name}.init
-Patch0:         autofs-5.0.6-fix-ipv6-name-for-lookup-fix.patch
-Patch102:       autofs-5.0.4-separate-config-files.patch
+Patch0:		autofs-5.0.6-fix-libtirpc-name-clash.patch
+Patch102:       autofs-5.0.6-separate-config-files.patch
 Patch103:       autofs-5.0.4-rename-configuration-file.patch
-Conflicts:       kernel < 2.6.17
-Requires(post): rpm-helper
-Requires(preun):rpm-helper
+Patch104:	autofs-5.0.7-do-not-install-init.patch
+Patch105:	autofs-5.0.7-after-nss-lookup.patch
 BuildRequires:  openldap-devel
 BuildRequires:  flex
 BuildRequires:  bison
 BuildRequires:  libsasl-devel
-BuildRequires:  krb-devel
+BuildRequires:  krb5-devel
 BuildRequires:  libxml2-devel
+BuildRequires:  tirpc-devel
 Conflicts:      autosmb
-Buildroot:      %{_tmppath}/%{name}-%{version}
+Requires(post):  rpm-helper >= 0.24.8-1
+Requires(preun): rpm-helper >= 0.24.8-1
 
 %description
 autofs is a daemon which automatically mounts filesystems when you use
@@ -33,17 +29,28 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch0 -p 1
-%patch102 -p 1
-%patch103 -p 1
+%patch0 -R -p1
+%patch102 -p1
+%patch103 -p1
+%patch104 -p0
+%patch105 -p1
 
 %build
-autoreconf
+autoreconf -f -i
 %serverbuild
-%configure2_5x --with-mapdir=%{_sysconfdir}/%{name} \
-           --with-confdir=%{_sysconfdir}/%{name} \
-           --with-sasl=yes
-%make DONTSTRIP=1
+
+export CFLAGS="%{optflags} -fPIC"
+
+%configure2_5x \
+    --with-mapdir=%{_sysconfdir}/%{name} \
+    --with-confdir=%{_sysconfdir}/%{name} \
+    --with-sasl=yes \
+    --disable-mount-locking \
+    --enable-ignore-busy \
+    --with-libtirpc \
+    --with-systemd
+
+%make DONTSTRIP=1  
 
 mkdir examples
 cp samples/ldap* examples
@@ -60,8 +67,8 @@ mkdir -p %{buildroot}%{_sysconfdir}
 
 %make install INSTALLROOT=%{buildroot}
 
-install -d -m 755 %{buildroot}%{_initrddir}
-install -m 755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
+install -d -m 755 %{buildroot}%{_unitdir}
+install -m 644 samples/autofs.service %{buildroot}%{_unitdir}/autofs.service
 
 rm -f %{buildroot}%{_sysconfdir}/init.d/%{name}
 rm -f %{buildroot}%{_mandir}/man8/autofs*
@@ -71,13 +78,10 @@ Mandriva RPM specific notes
 
 setup
 -----
-Configuration handling in Mandriva package differs from upstream one on several points:
+Configuration handling in Mandriva package differs from upstream one on several
+points:
 - the automounts daemon configuration file is %{_sysconfdir}/autofs/autofs.conf
 - the autofs service configuration file is %{_sysconfdir}/sysconfig/autofs
-- the configuration directives in %{_sysconfdir}/autofs/autofs.conf don't have
-  the 'DEFAULT_' prefix (for instance, DEFAULT_TIMEOUT is just TIMEOUT). This
-  has recently been changed upstream in version 5.0.2 too, but given than 
-  documentation still refers to old names
 
 Upgrade
 -------
@@ -98,35 +102,17 @@ perl -pi \
     -e 's|^/net\t|#/net\t|;' \
     %{buildroot}%{_sysconfdir}/autofs/auto.master
 
-%pre
-if [ $1 != "0" ]; then
-    # upgrade
-    if [ ! -d %{_sysconfdir}/autofs ]; then
-        # 4 -> 5 upgrade
-        mkdir %{_sysconfdir}/autofs
-        for file in %{_sysconfdir}/auto.{master,misc,net,smb}; do
-            if [ -f "$file" ]; then
-                mv $file* %{_sysconfdir}/autofs
-            fi
-        done
-    fi
-fi
-
 %post
 %_post_service autofs
 
 %preun
 %_preun_service autofs
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc INSTALL CHANGELOG CREDITS README* examples
 %config(noreplace) %{_sysconfdir}/autofs
 %config(noreplace) %{_sysconfdir}/sysconfig/autofs
-%{_initrddir}/%{name}
+%{_unitdir}/autofs.service
 %{_libdir}/%{name}
 %{_sbindir}/automount
 %{_mandir}/*/*
