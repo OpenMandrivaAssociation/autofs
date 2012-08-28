@@ -1,6 +1,6 @@
 Name:           autofs
 Version:        5.0.7
-Release:        %mkrel 1
+Release:        %mkrel 2
 License:        GPLv2+
 Summary:        A tool for automatically mounting and unmounting filesystems
 Group:          System/Kernel and hardware
