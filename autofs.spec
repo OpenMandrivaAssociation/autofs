@@ -19,8 +19,8 @@ BuildRequires:  krb5-devel
 BuildRequires:  libxml2-devel
 BuildRequires:  tirpc-devel
 Conflicts:      autosmb
-Requires(post):  rpm-helper >= 0.24.8-1
-Requires(preun): rpm-helper >= 0.24.8-1
+Requires(post):  rpm-helper >= 0.24.1-1
+Requires(preun): rpm-helper >= 0.24.1-1
 
 %description
 autofs is a daemon which automatically mounts filesystems when you use
