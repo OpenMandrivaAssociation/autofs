@@ -1,0 +1,11 @@
+--- samples/Makefile~	2012-07-28 23:06:32.704301413 -0400
++++ samples/Makefile	2012-07-28 23:14:50.768602825 -0400
+@@ -185,7 +185,7 @@
+ 		fi ; \
+ 	fi
+ 
+-install: rc.autofs autofs.conf.default dirs autofs.init autofs.service \
++install: rc.autofs autofs.conf.default dirs autofs.service \
+ 		autofs.conf autofs.initconf autofs_ldap_auth.conf $(SAMPLES)
+ 	@echo
+ 
