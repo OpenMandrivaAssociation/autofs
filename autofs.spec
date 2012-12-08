@@ -38,9 +38,7 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 %build
 autoreconf -f -i
 %serverbuild
-
 export CFLAGS="%{optflags} -fPIC"
-
 %configure2_5x \
     --with-mapdir=%{_sysconfdir}/%{name} \
     --with-confdir=%{_sysconfdir}/%{name} \
@@ -48,9 +46,9 @@ export CFLAGS="%{optflags} -fPIC"
     --disable-mount-locking \
     --enable-ignore-busy \
     --with-libtirpc \
+    --disable-mount-move \
     --with-systemd
-
-%make DONTSTRIP=1  
+%make DONTSTRIP=1
 
 mkdir examples
 cp samples/ldap* examples
@@ -74,11 +72,11 @@ rm -f %{buildroot}%{_sysconfdir}/init.d/%{name}
 rm -f %{buildroot}%{_mandir}/man8/autofs*
 
 cat > README.urpmi <<EOF
-Mandriva RPM specific notes
+ROSA RPM specific notes
 
 setup
 -----
-Configuration handling in Mandriva package differs from upstream one on several
+Configuration handling in ROSA package differs from upstream one on several
 points:
 - the automounts daemon configuration file is %{_sysconfdir}/autofs/autofs.conf
 - the autofs service configuration file is %{_sysconfdir}/sysconfig/autofs
