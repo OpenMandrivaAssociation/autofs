@@ -18,6 +18,7 @@ BuildRequires:  libsasl-devel
 BuildRequires:  krb5-devel
 BuildRequires:  libxml2-devel
 BuildRequires:  tirpc-devel
+BuildRequires:	kmod-compat
 Conflicts:      autosmb
 Requires(post):  rpm-helper >= 0.24.1-1
 Requires(preun): rpm-helper >= 0.24.1-1
