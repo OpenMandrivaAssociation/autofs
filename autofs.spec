@@ -29,15 +29,15 @@ them, and unmounts them later when you are not using them.  This can
 include network filesystems, CD-ROMs, floppies, and so forth.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 %patch0 -R -p1
 %patch102 -p1
 %patch103 -p1
 %patch104 -p0
 %patch105 -p1
+autoreconf -f -i
 
 %build
-autoreconf -f -i
 %serverbuild
 export CFLAGS="%{optflags} -fPIC"
 %configure2_5x \
