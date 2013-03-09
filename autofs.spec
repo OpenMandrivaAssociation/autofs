@@ -1,27 +1,26 @@
+Summary:        A tool for automatically mounting and unmounting filesystems
 Name:           autofs
 Version:        5.0.7
-Release:        %mkrel 3
+Release:        3
 License:        GPLv2+
-Summary:        A tool for automatically mounting and unmounting filesystems
 Group:          System/Kernel and hardware
-URL:            ftp://ftp.kernel.org/pub/linux/daemons/autofs
-Source0:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/autofs-%{version}.tar.bz2
-Patch0:		autofs-5.0.6-fix-libtirpc-name-clash.patch
+Url:            ftp://ftp.kernel.org/pub/linux/daemons/autofs
+Source0:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/%{name}-%{version}.tar.bz2
 Patch102:       autofs-5.0.6-separate-config-files.patch
 Patch103:       autofs-5.0.4-rename-configuration-file.patch
 Patch104:	autofs-5.0.7-do-not-install-init.patch
 Patch105:	autofs-5.0.7-after-nss-lookup.patch
-BuildRequires:  openldap-devel
-BuildRequires:  flex
+
 BuildRequires:  bison
-BuildRequires:  libsasl-devel
-BuildRequires:  krb5-devel
-BuildRequires:  libxml2-devel
-BuildRequires:  tirpc-devel
+BuildRequires:  flex
 BuildRequires:	kmod-compat
+BuildRequires:  krb5-devel
+BuildRequires:  libsasl-devel
+BuildRequires:  openldap-devel
+BuildRequires:  pkgconfig(libtirpc)
+BuildRequires:  pkgconfig(libxml-2.0)
+Requires(post,preun):  rpm-helper >= 0.24.1-1
 Conflicts:      autosmb
-Requires(post):  rpm-helper >= 0.24.1-1
-Requires(preun): rpm-helper >= 0.24.1-1
 
 %description
 autofs is a daemon which automatically mounts filesystems when you use
@@ -30,25 +29,21 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 
 %prep
 %setup -q
-%patch0 -R -p1
-%patch102 -p1
-%patch103 -p1
-%patch104 -p0
-%patch105 -p1
-autoreconf -f -i
+%apply_patches
+autoreconf -fi
 
 %build
 %serverbuild
 export CFLAGS="%{optflags} -fPIC"
 %configure2_5x \
-    --with-mapdir=%{_sysconfdir}/%{name} \
-    --with-confdir=%{_sysconfdir}/%{name} \
-    --with-sasl=yes \
-    --disable-mount-locking \
-    --enable-ignore-busy \
-    --with-libtirpc \
-    --disable-mount-move \
-    --with-systemd
+	--with-mapdir=%{_sysconfdir}/%{name} \
+	--with-confdir=%{_sysconfdir}/%{name} \
+	--with-sasl=yes \
+	--disable-mount-locking \
+	--enable-ignore-busy \
+	--with-libtirpc \
+	--disable-mount-move \
+	--with-systemd
 %make DONTSTRIP=1
 
 mkdir examples
@@ -58,7 +53,6 @@ cp samples/autofs.schema examples
 rm -f README.gentoo
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}%{_sbindir}
 mkdir -p %{buildroot}%{_libdir}/autofs
 mkdir -p %{buildroot}%{_mandir}/{man5,man8}
@@ -115,3 +109,4 @@ perl -pi \
 %{_libdir}/%{name}
 %{_sbindir}/automount
 %{_mandir}/*/*
+
