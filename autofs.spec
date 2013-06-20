@@ -15,8 +15,8 @@ BuildRequires:  bison
 BuildRequires:  flex
 BuildRequires:	kmod-compat
 BuildRequires:  krb5-devel
-BuildRequires:  libsasl-devel
 BuildRequires:  openldap-devel
+BuildRequires:  sasl-devel
 BuildRequires:  pkgconfig(libtirpc)
 BuildRequires:  pkgconfig(libxml-2.0)
 Requires(post,preun):  rpm-helper >= 0.24.1-1
