@@ -1,7 +1,7 @@
 Summary:        A tool for automatically mounting and unmounting filesystems
 Name:           autofs
 Version:        5.0.7
-Release:        7
+Release:        8
 License:        GPLv2+
 Group:          System/Kernel and hardware
 Url:            ftp://ftp.kernel.org/pub/linux/daemons/autofs
@@ -10,6 +10,7 @@ Patch102:       autofs-5.0.6-separate-config-files.patch
 Patch103:       autofs-5.0.4-rename-configuration-file.patch
 Patch104:	autofs-5.0.7-do-not-install-init.patch
 Patch105:	autofs-5.0.7-after-nss-lookup.patch
+Patch106:	autofs-5.0.7-add-missing-libtirpc-linkage.patch
 
 BuildRequires:  bison
 BuildRequires:  flex
