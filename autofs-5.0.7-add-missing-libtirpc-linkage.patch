@@ -1,0 +1,17 @@
+--- autofs-5.0.7/modules/Makefile~	2013-12-20 20:05:11.570151090 +0100
++++ autofs-5.0.7/modules/Makefile	2013-12-20 20:05:14.730193932 +0100
+@@ -107,8 +107,13 @@ lookup_ldap.so: lookup_ldap.c dclist.o b
+ 		$(AUTOFS_LIB) $(LIBLDAP) $(LIBRESOLV)
+ 	$(STRIP) lookup_ldap.so
+ 
++lookup_hosts.so: lookup_hosts.c
++	$(CC) $(SOLDFLAGS) $(CFLAGS) -o lookup_hosts.so \
++		lookup_hosts.c $(TIRPCLIB)
++	$(STRIP) lookup_hosts.so
++
+ mount_nfs.so: mount_nfs.c replicated.o
+ 	$(CC) $(SOLDFLAGS) $(CFLAGS) -o mount_nfs.so \
+-		mount_nfs.c replicated.o $(AUTOFS_LIB) $(LIBNSL)
++		mount_nfs.c replicated.o $(AUTOFS_LIB) $(LIBNSL) $(TIRPCLIB)
+ 	$(STRIP) mount_nfs.so
+ 
