@@ -1,7 +1,7 @@
 Summary:        A tool for automatically mounting and unmounting filesystems
 Name:           autofs
 Version:        5.0.7
-Release:        8
+Release:        9
 License:        GPLv2+
 Group:          System/Kernel and hardware
 Url:            ftp://ftp.kernel.org/pub/linux/daemons/autofs
@@ -45,6 +45,7 @@ export CFLAGS="%{optflags} -fPIC"
 	--with-libtirpc \
 	--disable-mount-move \
 	--with-systemd
+
 %make DONTSTRIP=1
 
 mkdir examples
@@ -72,7 +73,7 @@ ROSA RPM specific notes
 
 setup
 -----
-Configuration handling in ROSA package differs from upstream one on several
+Configuration handling in %{distribution} package differs from upstream one on several
 points:
 - the automounts daemon configuration file is %{_sysconfdir}/autofs/autofs.conf
 - the autofs service configuration file is %{_sysconfdir}/sysconfig/autofs
