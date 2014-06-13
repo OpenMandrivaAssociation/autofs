@@ -1,7 +1,7 @@
 Summary:        A tool for automatically mounting and unmounting filesystems
 Name:           autofs
 Version:        5.0.7
-Release:        10
+Release:        11
 License:        GPLv2+
 Group:          System/Kernel and hardware
 Url:            ftp://ftp.kernel.org/pub/linux/daemons/autofs
