@@ -1,13 +1,15 @@
+%define _disable_lto 1
+%define _disable_ld_no_undefined 1
+
 Summary:        A tool for automatically mounting and unmounting filesystems
 Name:           autofs
-Version:        5.0.7
-Release:        15
+Version:        5.1.1
+Release:        1
 License:        GPLv2+
 Group:          System/Kernel and hardware
 Url:            ftp://ftp.kernel.org/pub/linux/daemons/autofs
-Source0:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/%{name}-%{version}.tar.bz2
+Source0:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/%{name}-%{version}.tar.xz
 Patch102:       autofs-5.0.6-separate-config-files.patch
-Patch103:       autofs-5.0.4-rename-configuration-file.patch
 Patch104:	autofs-5.0.7-do-not-install-init.patch
 Patch105:	autofs-5.0.7-after-nss-lookup.patch
 Patch106:	autofs-5.0.7-add-missing-libtirpc-linkage.patch
@@ -76,7 +78,6 @@ setup
 Configuration handling in %{distribution} package differs from upstream one on several
 points:
 - the automounts daemon configuration file is %{_sysconfdir}/autofs/autofs.conf
-- the autofs service configuration file is %{_sysconfdir}/sysconfig/autofs
 
 Upgrade
 -------
@@ -106,7 +107,6 @@ perl -pi \
 %files
 %doc INSTALL CHANGELOG CREDITS README* examples
 %config(noreplace) %{_sysconfdir}/autofs
-%config(noreplace) %{_sysconfdir}/sysconfig/autofs
 %{_unitdir}/autofs.service
 %{_libdir}/%{name}
 %{_sbindir}/automount
