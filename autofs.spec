@@ -3,16 +3,14 @@
 
 Summary:        A tool for automatically mounting and unmounting filesystems
 Name:           autofs
-Version:        5.1.1
-Release:        2
+Version:	5.1.5
+Release:	1
 License:        GPLv2+
 Group:          System/Kernel and hardware
-Url:            ftp://ftp.kernel.org/pub/linux/daemons/autofs
-Source0:        ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/%{name}-%{version}.tar.xz
+Url:            http://kernel.org/pub/linux/daemons/autofs
+Source0:        http://kernel.org/pub/linux/daemons/autofs/v5/%{name}-%{version}.tar.xz
 Patch102:       autofs-5.0.6-separate-config-files.patch
 Patch104:	autofs-5.0.7-do-not-install-init.patch
-Patch105:	autofs-5.0.7-after-nss-lookup.patch
-Patch106:	autofs-5.0.7-add-missing-libtirpc-linkage.patch
 
 BuildRequires:  bison
 BuildRequires:  flex
@@ -38,7 +36,7 @@ autoreconf -fi
 %build
 %serverbuild
 export CFLAGS="%{optflags} -fPIC"
-%configure2_5x \
+%configure \
 	--with-mapdir=%{_sysconfdir}/%{name} \
 	--with-confdir=%{_sysconfdir}/%{name} \
 	--with-sasl=yes \
@@ -57,58 +55,60 @@ cp samples/autofs.schema examples
 rm -f README.gentoo
 
 %install
-mkdir -p %{buildroot}%{_sbindir}
-mkdir -p %{buildroot}%{_libdir}/autofs
-mkdir -p %{buildroot}%{_mandir}/{man5,man8}
-mkdir -p %{buildroot}%{_sysconfdir}
-
-%make install INSTALLROOT=%{buildroot}
-
 install -d -m 755 %{buildroot}%{_unitdir}
-install -m 644 samples/autofs.service %{buildroot}%{_unitdir}/autofs.service
+mkdir -p -m755 %{buildroot}%{_sbindir}
+mkdir -p -m755 %{buildroot}%{_libdir}/autofs
+mkdir -p -m755 %{buildroot}%{_mandir}/{man5,man8}
+mkdir -p -m755 %{buildroot}/etc/sysconfig
+mkdir -p -m755 %{buildroot}/etc/auto.master.d
 
-rm -f %{buildroot}%{_sysconfdir}/init.d/%{name}
-rm -f %{buildroot}%{_mandir}/man8/autofs*
+make install mandir=%{_mandir} initdir=%{_initrddir} systemddir=%{_unitdir} INSTALLROOT=%{buildroot}
+echo make -C redhat
+make -C redhat
+install -m 755 -d %{buildroot}/misc
+# Configure can get this wrong when the unit files appear under /lib and /usr/lib
+find %{buildroot} -type f -name autofs.service -exec rm -f {} \;
+install -m 644 redhat/autofs.service %{buildroot}%{_unitdir}/autofs.service
+%define init_file_name %{_unitdir}/autofs.service
+install -m 644 redhat/autofs.conf %{buildroot}/etc/autofs.conf
+install -m 644 redhat/autofs.sysconfig %{buildroot}/etc/sysconfig/autofs
 
-cat > README.urpmi <<EOF
-%{distribution} specific notes
-
-setup
------
-Configuration handling in %{distribution} package differs from upstream one on several
-points:
-- the automounts daemon configuration file is %{_sysconfdir}/autofs/autofs.conf
-
-Upgrade
--------
-Map files have been moved from %{_sysconfdir} to %{_sysconfdir}/autofs. Upgrade
-procedure should handle the change automatically.
-LDAP usage has changed between autofs 4 and 5. The LDAP schema used has now to
-be configured explicitely in autofs configuration, so as to avoid useless
-queries. As this can't be handled by package upgrade procedure, you'll have to
-edit your configuration manually. See auto.master(5) for details.
-
-EOF
-
-# tune default configuration
-perl -pi -e 's|^BROWSE_MODE="no"|BROWSE_MODE="yes"|' \
-    %{buildroot}%{_sysconfdir}/autofs/autofs.conf
-perl -pi \
-    -e 's|^/misc\t|#/misc\t|;' \
-    -e 's|^/net\t|#/net\t|;' \
-    %{buildroot}%{_sysconfdir}/autofs/auto.master
+install -m 644 samples/auto.master %{buildroot}/etc/auto.master
+install -m 644 samples/auto.misc %{buildroot}/etc/auto.misc
+install -m 755 samples/auto.net %{buildroot}/etc/auto.net
+install -m 755 samples/auto.smb %{buildroot}/etc/auto.smb
+install -m 600 samples/autofs_ldap_auth.conf %{buildroot}/etc/autofs_ldap_auth.conf
 
 %post
-%_post_service autofs
+%systemd_post %{name}.service
 
 %preun
-%_preun_service autofs
+%systemd_preun %{name}.service
+
+%postun
+%systemd_postun_with_restart %{name}.service
+
+%triggerun -- %{name} < 5.0.6-5
+# Save the current service runlevel info
+# User must manually run systemd-sysv-convert --apply %{name}
+# to migrate them to systemd targets
+%{_bindir}/systemd-sysv-convert --save %{name} >/dev/null 2>&1 ||:
+
+# Run these because the SysV package being removed won't do them
+%{_sbindir}/chkconfig --del %{name} >/dev/null 2>&1 || :
+%{_bindir}/systemctl try-restart %{name}.service >/dev/null 2>&1 || :
 
 %files
-%doc INSTALL CHANGELOG CREDITS README* examples
-%config(noreplace) %{_sysconfdir}/autofs
-%{_unitdir}/autofs.service
-%{_libdir}/%{name}
+%doc CREDITS INSTALL COPY* README* samples/ldap* samples/autofs.schema
+%{_unitdir}/%{name}.service
+%config(noreplace,missingok) /etc/auto.master
+%config(noreplace) /etc/autofs.conf
+%config(noreplace,missingok) /etc/auto.misc
+%config(noreplace,missingok) /etc/auto.net
+%config(noreplace,missingok) /etc/auto.smb
+%config(noreplace) /etc/sysconfig/autofs
+%config(noreplace) /etc/autofs_ldap_auth.conf
 %{_sbindir}/automount
 %{_mandir}/*/*
-
+%{_libdir}/autofs/
+%dir /etc/auto.master.d

@@ -1,4 +1,2 @@
-removed_sources:
-  autofs-5.0.7.tar.bz2: b2604cbd78ed7a854cb434061a7c37e84a984870
 sources:
-  autofs-5.1.1.tar.xz: 69e567b0f424aa56cd57e2b4e12d27cef291a268
+  autofs-5.1.5.tar.xz: f60ce7b1e4e3c380fbca8347b395f7fc07a141ec
