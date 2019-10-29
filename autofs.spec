@@ -3,7 +3,7 @@
 
 Summary:        A tool for automatically mounting and unmounting filesystems
 Name:           autofs
-Version:	5.1.5
+Version:	5.1.6
 Release:	1
 License:        GPLv2+
 Group:          System/Kernel and hardware
@@ -18,6 +18,8 @@ BuildRequires:	kmod-compat
 BuildRequires:  krb5-devel
 BuildRequires:  openldap-devel
 BuildRequires:  sasl-devel
+BuildRequires:  openssl-devel
+BuildRequires:  pkgconfig(libsystemd)
 BuildRequires:  pkgconfig(libtirpc)
 BuildRequires:  pkgconfig(libxml-2.0)
 Requires(post,preun):  rpm-helper >= 0.24.1-1
