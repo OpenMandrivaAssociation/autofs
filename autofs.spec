@@ -32,7 +32,7 @@ include network filesystems, CD-ROMs, floppies, and so forth.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 autoreconf -fi
 
 %build
