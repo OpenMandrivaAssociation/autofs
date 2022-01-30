@@ -3,7 +3,7 @@
 
 Summary:        A tool for automatically mounting and unmounting filesystems
 Name:           autofs
-Version:	5.1.6
+Version:	5.1.8
 Release:	1
 License:        GPLv2+
 Group:          System/Kernel and hardware
