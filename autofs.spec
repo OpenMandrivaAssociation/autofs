@@ -113,4 +113,5 @@ install -m 600 samples/autofs_ldap_auth.conf %{buildroot}/etc/autofs_ldap_auth.c
 %{_sbindir}/automount
 %{_mandir}/*/*
 %{_libdir}/autofs/
+%{_libdir}/libautofs.so
 %dir /etc/auto.master.d
