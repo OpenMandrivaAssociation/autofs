@@ -18,7 +18,7 @@ BuildRequires:	kmod-compat
 BuildRequires:  krb5-devel
 BuildRequires:  openldap-devel
 BuildRequires:  sasl-devel
-BuildRequires:  openssl-devel
+BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(libsystemd)
 BuildRequires:  pkgconfig(libtirpc)
 BuildRequires:  pkgconfig(libxml-2.0)
