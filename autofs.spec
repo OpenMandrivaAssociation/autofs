@@ -7,7 +7,7 @@ Version:	5.1.8
 Release:	3
 License:        GPLv2+
 Group:          System/Kernel and hardware
-Url:            http://kernel.org/pub/linux/daemons/autofs
+Url:            https://kernel.org/pub/linux/daemons/autofs
 Source0:        http://kernel.org/pub/linux/daemons/autofs/v5/%{name}-%{version}.tar.xz
 Patch102:       autofs-5.0.6-separate-config-files.patch
 Patch104:	autofs-5.0.7-do-not-install-init.patch
