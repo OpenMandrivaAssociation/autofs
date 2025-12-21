@@ -12,6 +12,11 @@ Source0:        http://kernel.org/pub/linux/daemons/autofs/v5/%{name}-%{version}
 Patch102:       autofs-5.0.6-separate-config-files.patch
 Patch104:	autofs-5.0.7-do-not-install-init.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:  bison
 BuildRequires:  flex
 BuildRequires:	kmod-compat
