@@ -21,7 +21,7 @@ BuildRequires:  bison
 BuildRequires:  flex
 BuildRequires:	kmod-compat
 BuildRequires:  krb5-devel
-BuildRequires:  openldap-devel
+BuildRequires:  pkgconfig(ldap)
 BuildRequires:  sasl-devel
 BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(libsystemd)
