@@ -1,6 +1,9 @@
 %define _disable_lto 1
 %define _disable_ld_no_undefined 1
 
+# cyrus-sasl callbacks are stored in int (*)(void) slots.
+%global optflags %{optflags} -Wno-incompatible-function-pointer-types
+
 Summary:        A tool for automatically mounting and unmounting filesystems
 Name:           autofs
 Version:	5.1.9
