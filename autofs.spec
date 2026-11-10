@@ -6,7 +6,7 @@
 
 Summary:        A tool for automatically mounting and unmounting filesystems
 Name:           autofs
-Version:	5.1.9
+Version:	5.2.0
 Release:	1
 License:        GPLv2+
 Group:          System/Kernel and hardware
@@ -16,9 +16,6 @@ Patch102:       autofs-5.0.6-separate-config-files.patch
 Patch104:	autofs-5.0.7-do-not-install-init.patch
 
 BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	libtool-base
-BuildRequires:	slibtool
 BuildRequires:	make
 BuildRequires:  bison
 BuildRequires:  flex
@@ -30,7 +27,6 @@ BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(libsystemd)
 BuildRequires:  pkgconfig(libtirpc)
 BuildRequires:  pkgconfig(libxml-2.0)
-Requires(post,preun):  rpm-helper >= 0.24.1-1
 Conflicts:      autosmb
 
 %description
@@ -88,15 +84,6 @@ install -m 644 samples/auto.misc %{buildroot}/etc/auto.misc
 install -m 755 samples/auto.net %{buildroot}/etc/auto.net
 install -m 755 samples/auto.smb %{buildroot}/etc/auto.smb
 install -m 600 samples/autofs_ldap_auth.conf %{buildroot}/etc/autofs_ldap_auth.conf
-
-%post
-%systemd_post %{name}.service
-
-%preun
-%systemd_preun %{name}.service
-
-%postun
-%systemd_postun_with_restart %{name}.service
 
 %triggerun -- %{name} < 5.0.6-5
 # Save the current service runlevel info
